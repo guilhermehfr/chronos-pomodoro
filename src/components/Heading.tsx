@@ -1,11 +1,20 @@
 import styles from './Heading.module.css';
 
-export function Heading() {
+type PropsType = Record<string, string> | null;
+
+export function Heading(props: PropsType) {
   return (
     <>
       <header>
-        <h1 className={styles['header-greet']}>
-          Hello, I am part of the Heading!
+        <h1 className={`${styles['header-greet']}  ${styles['white-text']}`}>
+          Hello, I am the default part of the Heading
+          {props !== null && props.studiedToday && (
+            <ul>
+              <li>Message: {props.children}</li>
+              <li>Date: {props.date}</li>
+              <li>Studied: {props.studiedToday}</li>
+            </ul>
+          )}
         </h1>
       </header>
     </>
