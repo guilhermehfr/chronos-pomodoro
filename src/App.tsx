@@ -1,4 +1,6 @@
-import './App.css';
+import './styles/theme.css';
+import './styles/global.css';
+
 console.log('Carregando aplicação...');
 
 export function App() {
