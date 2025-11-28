@@ -1,13 +1,15 @@
 import { Heading } from './components/Heading';
+import { TimerIcon } from 'lucide-react';
 
 export function App() {
-  const currentDate = new Date();
   return (
     <>
-      <Heading date={`${currentDate}`} studiedToday='true'>
+      <Heading>
         I am part of the App.
+        <button>
+          <TimerIcon />
+        </button>
       </Heading>
-      <h2>Secondary text.</h2>
     </>
   );
 }
