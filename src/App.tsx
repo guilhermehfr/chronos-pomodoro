@@ -1,5 +1,3 @@
-import './styles/theme.css';
-import './styles/global.css';
 import { Heading } from './components/Heading';
 
 export function App() {
@@ -7,7 +5,7 @@ export function App() {
   return (
     <>
       <Heading date={`${currentDate}`} studiedToday='true'>
-        Hello, Guilherme!
+        I am part of the App.
       </Heading>
       <h2>Secondary text.</h2>
     </>
