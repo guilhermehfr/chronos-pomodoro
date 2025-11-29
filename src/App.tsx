@@ -1,15 +1,30 @@
-import { Heading } from './components/Heading';
-import { TimerIcon } from 'lucide-react';
+import './styles/Normalize.css';
+import './styles/theme.css';
+import './styles/global.css';
 
 export function App() {
   return (
     <>
-      <Heading>
-        I am part of the App.
-        <button>
-          <TimerIcon />
-        </button>
-      </Heading>
+      <div className='container'>
+        <div className='content'>
+          <section>LOGO</section>
+        </div>
+      </div>
+      <div className='container'>
+        <div className='content'>
+          <section>MENU</section>
+        </div>
+      </div>
+      <div className='container'>
+        <div className='content'>
+          <section>FORMULARIO</section>
+        </div>
+      </div>
+      <div className='container'>
+        <div className='content'>
+          <section>FOOTER</section>
+        </div>
+      </div>
     </>
   );
 }
