@@ -1,24 +1,29 @@
 import styles from './styles.module.css';
 
 type InputProps = {
-  children: string;
-};
+  id: string;
+  labelText: string;
+} & React.ComponentProps<'input'>;
 
-export function InputChronos({ children }: InputProps) {
+export function InputChronos({
+  id,
+  type,
+  placeholder = '',
+  labelText,
+  ...rest
+}: InputProps) {
   return (
     <>
-      <form className={styles['form']} action='POST'>
-        <div className={styles['form-row']}>
-          <label htmlFor={styles.input}>
-            <input
-              type='text'
-              id={styles.input}
-              placeholder='Ex.: estudar para a prova'
-            />
-            <span>{children}:</span>
-          </label>
-        </div>
-      </form>
+      <label htmlFor={styles.inputChronos} className={styles['input-label']}>
+        <input
+          id={id}
+          type={type}
+          className={styles.input}
+          placeholder={placeholder}
+          {...rest}
+        />
+        <span className={styles['label-text']}>{labelText}</span>
+      </label>
     </>
   );
 }
