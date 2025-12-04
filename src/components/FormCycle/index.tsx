@@ -7,9 +7,9 @@ export function FormCycle() {
       <form className={styles.form} action='#'>
         <div className={styles['form-row']}>
           <InputChronos
-            name='current-task'
             id='task'
             type='text'
+            name='current-task'
             placeholder='Ex.: estudar para a prova'
             labelText='Task:'
           />
@@ -20,8 +20,20 @@ export function FormCycle() {
         </div>
 
         <div className={styles['form-row']}>
-          <p>Cycles</p>
-          <p>0 0 0 0 0 0 0</p>
+          <div className={styles['cycles-info']}>
+            <span>Cycles:</span>
+            <div className={styles['cycles-dots']}>
+              <span
+                className={`${styles['cycle-dot']} ${styles['work-time']}`}
+              ></span>
+              <span
+                className={`${styles['cycle-dot']} ${styles['break-time']}`}
+              ></span>
+              <span
+                className={`${styles['cycle-dot']} ${styles['long-break-time']}`}
+              ></span>
+            </div>
+          </div>
         </div>
 
         <div className={styles['form-row']}>

@@ -2,6 +2,7 @@ import { Container } from './components/Container';
 import { Logo } from './components/Logo';
 import { Menu } from './components/Menu';
 import { Countdown } from './components/Countdown';
+import { FormCycle } from './components/FormCycle';
 
 import './styles/Normalize.css';
 import './styles/theme.css';
@@ -18,6 +19,9 @@ export function App() {
       </Container>
       <Container>
         <Countdown />
+      </Container>
+      <Container>
+        <FormCycle />
       </Container>
     </>
   );

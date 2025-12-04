@@ -3,13 +3,13 @@ import styles from './styles.module.css';
 type InputProps = {
   id: string;
   labelText: string;
+  placeholder?: string;
 } & React.ComponentProps<'input'>;
 
 export function InputChronos({
   id,
-  type,
-  placeholder = '',
   labelText,
+  placeholder = '',
   ...rest
 }: InputProps) {
   return (
@@ -17,7 +17,6 @@ export function InputChronos({
       <label htmlFor={styles.inputChronos} className={styles['input-label']}>
         <input
           id={id}
-          type={type}
           className={styles.input}
           placeholder={placeholder}
           {...rest}
