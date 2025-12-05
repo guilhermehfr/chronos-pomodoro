@@ -1,7 +1,12 @@
 import styles from './styles.module.css';
 import { InputChronos } from '../InputChronos';
+import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
 
 export function FormCycle() {
+  const buttonColor: string = 'red';
+  const buttonIcon: React.ReactNode =
+    buttonColor === 'red' ? <StopCircleIcon /> : <PlayCircleIcon />;
+
   return (
     <>
       <form className={styles.form} action='#'>
@@ -37,7 +42,9 @@ export function FormCycle() {
         </div>
 
         <div className={styles['form-row']}>
-          <button>Send</button>
+          <button className={`${styles['button']} ${styles[buttonColor]}`}>
+            {buttonIcon}
+          </button>
         </div>
       </form>
     </>
