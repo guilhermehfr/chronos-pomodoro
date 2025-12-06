@@ -1,6 +1,5 @@
 import { Container } from './components/Container';
-import { Logo } from './components/Logo';
-import { Menu } from './components/Menu';
+import { Heading } from './components/Heading';
 import { Countdown } from './components/Countdown';
 import { FormCycle } from './components/FormCycle';
 import { Footer } from './components/Footer';
@@ -13,10 +12,7 @@ export function App() {
   return (
     <>
       <Container>
-        <Logo />
-      </Container>
-      <Container>
-        <Menu />
+        <Heading />
       </Container>
       <Container>
         <Countdown />
