@@ -15,7 +15,7 @@ export function FormCycle() {
             id='task'
             type='text'
             name='current-task'
-            placeholder='Ex.: estudar para a prova'
+            placeholder='Ex.: study to the exam'
             labelText='Task:'
           />
         </div>
