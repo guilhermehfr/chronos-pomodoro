@@ -20,4 +20,5 @@ body {
   color: var(--text-default);
   width: 100vw;
   height: 93.11vh;
+  transition: all 100ms ease-in-out;
 }
