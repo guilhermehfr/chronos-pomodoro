@@ -1,5 +1,4 @@
 import { MainTemplate } from '../../templates/MainTemplate';
-
 import { GenericHTML } from '../../components/GenericHTML';
 
 export function PomodoroTechnique() {
