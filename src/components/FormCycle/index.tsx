@@ -32,7 +32,7 @@ export function FormCycle() {
                 className={`${styles['cycle-dot']} ${styles['work-time']}`}
               ></span>
               <span
-                className={`${styles['cycle-dot']} ${styles['break-time']}`}
+                className={`${styles['cycle-dot']} ${styles['short-break-time']}`}
               ></span>
               <span
                 className={`${styles['cycle-dot']} ${styles['long-break-time']}`}
