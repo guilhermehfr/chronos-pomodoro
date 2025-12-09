@@ -1,0 +1,22 @@
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.content-wrapper h1 {
+  font-size: 3rem;
+}
+
+.content-wrapper p {
+  font-size: 2rem;
+}
+
+.content-wrapper p a {
+  color: var(--primary);
+}
+
+.content-wrapper p a:hover {
+  filter: brightness(80%);
+}
