@@ -11,7 +11,7 @@ import './styles/global.css';
 const initialState: TaskStateModel = {
   tasks: [],
   secondsRemaining: 0,
-  FormattedSecondsRemaining: '00:00',
+  formattedSecondsRemaining: '00:00',
   activeTask: null,
   currentCycle: 0,
   config: {

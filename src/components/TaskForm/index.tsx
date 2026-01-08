@@ -2,14 +2,16 @@ import { Container } from '../Container';
 import { Countdown } from '../Countdown';
 import { FormCycle } from '../FormCycle';
 
-export function TaskForm() {
+import type { HomeProps } from '../../pages/Home';
+
+export function TaskForm(props: HomeProps) {
   return (
     <>
       <Container>
-        <Countdown />
+        <Countdown {...props} />
       </Container>
       <Container>
-        <FormCycle />
+        <FormCycle {...props}/>
       </Container>
     </>
   );

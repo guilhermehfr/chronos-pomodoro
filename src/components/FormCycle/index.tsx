@@ -1,8 +1,11 @@
-import styles from './styles.module.css';
-import { InputChronos } from '../InputChronos';
 import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
+import { InputChronos } from '../InputChronos';
 
-export function FormCycle() {
+import type { HomeProps } from '../../pages/Home';
+
+import styles from './styles.module.css';
+
+export function FormCycle({ state }: HomeProps) {
   const buttonColor: string = 'red';
   const buttonIcon: React.ReactNode =
     buttonColor === 'red' ? <StopCircleIcon /> : <PlayCircleIcon />;
