@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import type { TaskStateModel } from './models/TaskStateModel';
 
+import { TaskContext } from './contexts/TaskContext';
 import { Home } from './pages/Home';
 
 import './styles/Normalize.css';
@@ -24,5 +25,10 @@ const initialState: TaskStateModel = {
 export function App() {
   const [state, setState] = useState(initialState);
 
-  return <Home />;
+
+  return (
+    <TaskContext.Provider value={{ key: 'value2'}}>
+      <Home />
+    </TaskContext.Provider>
+  );
 }
