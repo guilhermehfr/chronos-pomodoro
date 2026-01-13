@@ -1,5 +1,7 @@
 import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
+
 import { InputChronos } from '../InputChronos';
+import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 
 import styles from './styles.module.css';
 
@@ -8,13 +10,13 @@ export function FormCycle() {
   const buttonIcon: React.ReactNode =
     buttonColor === 'red' ? <StopCircleIcon /> : <PlayCircleIcon />;
 
-    document.querySelector('form')?.addEventListener('submit', (e: Event) => {
-      e.preventDefault();
-    });
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
+    event.preventDefault();
+  }
 
   return (
     <>
-      <form className={styles.form} action='#'>
+      <form onSubmit={handleSubmit} className={styles.form} action='#'>
         <div className={styles['form-row']}>
           <InputChronos
             id='task'
