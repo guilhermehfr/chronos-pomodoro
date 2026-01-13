@@ -8,6 +8,10 @@ export function FormCycle() {
   const buttonIcon: React.ReactNode =
     buttonColor === 'red' ? <StopCircleIcon /> : <PlayCircleIcon />;
 
+    document.querySelector('form')?.addEventListener('submit', (e: Event) => {
+      e.preventDefault();
+    });
+
   return (
     <>
       <form className={styles.form} action='#'>
@@ -43,7 +47,7 @@ export function FormCycle() {
         </div>
 
         <div className={styles['form-row']}>
-          <button className={`${styles['button']} ${styles[buttonColor]}`}>
+          <button type='submit' className={`${styles['button']} ${styles[buttonColor]}`}>
             {buttonIcon}
           </button>
         </div>
