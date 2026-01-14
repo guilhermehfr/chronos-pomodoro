@@ -5,7 +5,7 @@ export function Home() {
   return (
     <>
       <MainTemplate>
-        <TaskForm/>
+        <TaskForm />
       </MainTemplate>
     </>
   );

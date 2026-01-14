@@ -1,7 +1,7 @@
+import { useRef } from 'react';
 import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
 
 import { InputChronos } from '../InputChronos';
-import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 
 import styles from './styles.module.css';
 
@@ -9,6 +9,8 @@ export function FormCycle() {
   const buttonColor: string = 'red';
   const buttonIcon: React.ReactNode =
     buttonColor === 'red' ? <StopCircleIcon /> : <PlayCircleIcon />;
+
+  const taskNameInput = useRef<HTMLInputElement>(null);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
     event.preventDefault();
@@ -24,6 +26,7 @@ export function FormCycle() {
             name='current-task'
             placeholder='Ex.: study to the exam'
             labelText='Task:'
+            ref={taskNameInput}
           />
         </div>
 
@@ -49,7 +52,10 @@ export function FormCycle() {
         </div>
 
         <div className={styles['form-row']}>
-          <button type='submit' className={`${styles['button']} ${styles[buttonColor]}`}>
+          <button
+            type='submit'
+            className={`${styles['button']} ${styles[buttonColor]}`}
+          >
             {buttonIcon}
           </button>
         </div>

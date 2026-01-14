@@ -8,7 +8,9 @@ export function Countdown() {
   return (
     <>
       <div className={styles['countdown-wrapper']}>
-        <span className={styles['countdown']}>{state.formattedSecondsRemaining}</span>
+        <span className={styles['countdown']}>
+          {state.formattedSecondsRemaining}
+        </span>
       </div>
     </>
   );
