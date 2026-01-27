@@ -3,6 +3,7 @@ import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
 
 import type { TaskModel } from '../../models/TaskModel';
 
+import { getNextCycle } from '../../utils/getNextCycle';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { InputChronos } from '../InputChronos';
 
@@ -15,7 +16,9 @@ export function FormCycle() {
     buttonColor === 'red' ? <StopCircleIcon /> : <PlayCircleIcon />;
 
   const taskNameInput = useRef<HTMLInputElement>(null);
-  const { setState } = useTaskContext();
+  const { state, setState } = useTaskContext();
+
+  const nextCycle = getNextCycle(state.currentCycle);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
@@ -46,7 +49,7 @@ export function FormCycle() {
         ...prevState,
         tasks: [...prevState.tasks, newTask],
         activeTask: newTask,
-        currentCycle: 1,
+        currentCycle: nextCycle,
         secondsRemaining,
         formattedSecondsRemaining: '00:01',
       };
