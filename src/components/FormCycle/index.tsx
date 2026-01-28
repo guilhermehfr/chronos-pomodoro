@@ -1,24 +1,28 @@
 import { useRef } from 'react';
 import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
 
+import { InputChronos } from '../InputChronos';
+
 import type { TaskModel } from '../../models/TaskModel';
 
-import { getNextCycle } from '../../utils/getNextCycle';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
-import { InputChronos } from '../InputChronos';
+import { getNextCycle } from '../../utils/getNextCycle';
+import { getNextCycleType } from '../../utils/getNextCycleType';
+import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
 
 import styles from './styles.module.css';
 
 export function FormCycle() {
-  const buttonColor: string = 'red';
+  const { state, setState } = useTaskContext();
 
+  const nextCycle = getNextCycle(state.currentCycle);
+  const nextCycleType = getNextCycleType(nextCycle);
+
+  const buttonColor: string = 'red';
   const buttonIcon: React.ReactNode =
     buttonColor === 'red' ? <StopCircleIcon /> : <PlayCircleIcon />;
 
   const taskNameInput = useRef<HTMLInputElement>(null);
-  const { state, setState } = useTaskContext();
-
-  const nextCycle = getNextCycle(state.currentCycle);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
@@ -38,8 +42,8 @@ export function FormCycle() {
       startDate: Date.now(),
       completeDate: null,
       interruptDate: null,
-      duration: 1,
-      type: 'workTime',
+      duration: state.config[nextCycleType],
+      type: nextCycleType,
     };
 
     setState(prevState => {
@@ -51,10 +55,12 @@ export function FormCycle() {
         activeTask: newTask,
         currentCycle: nextCycle,
         secondsRemaining,
-        formattedSecondsRemaining: '00:01',
+        formattedSecondsRemaining: formatSecondsToMinutes(secondsRemaining),
       };
     });
   }
+
+  console.log(state);
 
   return (
     <>
@@ -71,23 +77,13 @@ export function FormCycle() {
         </div>
 
         <div className={styles['form-row']}>
-          <p>Lorem ipsum dolor sit amet.</p>
+          <p>In this cycle X for Y min</p>
         </div>
 
         <div className={styles['form-row']}>
           <div className={styles['cycles-info']}>
             <span>Cycles:</span>
-            <div className={styles['cycles-dots']}>
-              <span
-                className={`${styles['cycle-dot']} ${styles['work-time']}`}
-              ></span>
-              <span
-                className={`${styles['cycle-dot']} ${styles['short-break-time']}`}
-              ></span>
-              <span
-                className={`${styles['cycle-dot']} ${styles['long-break-time']}`}
-              ></span>
-            </div>
+            <div className={styles['cycles-dots']}></div>
           </div>
         </div>
 
