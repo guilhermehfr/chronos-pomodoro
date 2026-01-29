@@ -34,15 +34,15 @@
   height: 2rem;
 }
 
-.work-time {
+.workTime {
   background-color: var(--success);
 }
 
-.short-break-time {
+.shortBreakTime {
   background-color: var(--info);
 }
 
-.long-break-time {
+.longBreakTime {
   background-color: var(--warning);
 }
 

@@ -26,7 +26,6 @@ export function FormCycle() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
-
     if (taskNameInput.current === null) return;
 
     const taskName: string = taskNameInput.current.value.trim();
@@ -60,7 +59,7 @@ export function FormCycle() {
     });
   }
 
-  console.log(state);
+  const cycleStep = Array.from({ length: state.currentCycle });
 
   return (
     <>
@@ -83,7 +82,18 @@ export function FormCycle() {
         <div className={styles['form-row']}>
           <div className={styles['cycles-info']}>
             <span>Cycles:</span>
-            <div className={styles['cycles-dots']}></div>
+            <div className={styles['cycles-dots']}>
+              {cycleStep.map((_, index) => {
+                const nextCycle = getNextCycle(index);
+                const nextCycleType = getNextCycleType(nextCycle);
+
+                return (
+                  <span
+                    className={`${styles['cycle-dot']} ${styles[nextCycleType]}`}
+                  ></span>
+                );
+              })}
+            </div>
           </div>
         </div>
 
