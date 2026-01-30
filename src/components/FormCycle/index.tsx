@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
 
 import { Cycles } from '../Cycles';
 import { InputChronos } from '../InputChronos';
@@ -56,6 +57,18 @@ export function FormCycle() {
     });
   }
 
+  function handleInterruptTask() {
+    setState(prevState => {
+      return {
+        ...prevState,
+        tasks: [...prevState.tasks],
+        activeTask: null,
+        secondsRemaining: 0,
+        formattedSecondsRemaining: '00:00',
+      };
+    });
+  }
+
   return (
     <>
       <form onSubmit={handleSubmit} className={styles.form} action='#'>
@@ -67,6 +80,7 @@ export function FormCycle() {
             placeholder='Ex.: study to the exam'
             labelText='Task:'
             ref={taskNameInput}
+            disabled={!!state.activeTask}
           />
         </div>
 
@@ -75,7 +89,24 @@ export function FormCycle() {
         </div>
 
         <div className={styles['form-row']}>
-          <CycleControlButton />
+          {state.activeTask ? (
+            <CycleControlButton
+              type='button'
+              onClick={handleInterruptTask}
+              aria-label='stop current task'
+              title='stop current task'
+              color='red'
+              icon={<StopCircleIcon />}
+            />
+          ) : (
+            <CycleControlButton
+              type='submit'
+              aria-label='start new task'
+              title='start new task'
+              color='green'
+              icon={<PlayCircleIcon />}
+            />
+          )}
         </div>
       </form>
     </>
