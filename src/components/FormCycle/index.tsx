@@ -1,7 +1,8 @@
 import { useRef } from 'react';
-import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
 
+import { Cycles } from '../Cycles';
 import { InputChronos } from '../InputChronos';
+import { CycleControlButton } from '../CycleControlButton';
 
 import type { TaskModel } from '../../models/TaskModel';
 
@@ -17,10 +18,6 @@ export function FormCycle() {
 
   const nextCycle = getNextCycle(state.currentCycle);
   const nextCycleType = getNextCycleType(nextCycle);
-
-  const buttonColor: string = 'red';
-  const buttonIcon: React.ReactNode =
-    buttonColor === 'red' ? <StopCircleIcon /> : <PlayCircleIcon />;
 
   const taskNameInput = useRef<HTMLInputElement>(null);
 
@@ -59,8 +56,6 @@ export function FormCycle() {
     });
   }
 
-  const cycleStep = Array.from({ length: state.currentCycle });
-
   return (
     <>
       <form onSubmit={handleSubmit} className={styles.form} action='#'>
@@ -76,34 +71,11 @@ export function FormCycle() {
         </div>
 
         <div className={styles['form-row']}>
-          <p>In this cycle X for Y min</p>
+          <Cycles />
         </div>
 
         <div className={styles['form-row']}>
-          <div className={styles['cycles-info']}>
-            <span>Cycles:</span>
-            <div className={styles['cycles-dots']}>
-              {cycleStep.map((_, index) => {
-                const nextCycle = getNextCycle(index);
-                const nextCycleType = getNextCycleType(nextCycle);
-
-                return (
-                  <span
-                    className={`${styles['cycle-dot']} ${styles[nextCycleType]}`}
-                  ></span>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        <div className={styles['form-row']}>
-          <button
-            type='submit'
-            className={`${styles['button']} ${styles[buttonColor]}`}
-          >
-            {buttonIcon}
-          </button>
+          <CycleControlButton />
         </div>
       </form>
     </>
