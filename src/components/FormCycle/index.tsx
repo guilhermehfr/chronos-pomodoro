@@ -71,7 +71,12 @@ export function FormCycle() {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className={styles.form} action='#'>
+      <form
+        onSubmit={handleSubmit}
+        className={styles.form}
+        action='#'
+        autoComplete='off'
+      >
         <div className={styles['form-row']}>
           <InputChronos
             id='task'
@@ -91,6 +96,7 @@ export function FormCycle() {
         <div className={styles['form-row']}>
           {state.activeTask ? (
             <CycleControlButton
+              key='stop_task'
               type='button'
               onClick={handleInterruptTask}
               aria-label='stop current task'
@@ -100,6 +106,7 @@ export function FormCycle() {
             />
           ) : (
             <CycleControlButton
+              key='start_task'
               type='submit'
               aria-label='start new task'
               title='start new task'
