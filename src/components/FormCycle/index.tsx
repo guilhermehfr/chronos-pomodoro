@@ -61,9 +61,10 @@ export function FormCycle() {
     setState(prevState => {
       return {
         ...prevState,
-        tasks: prevState.tasks.map((task, idx, arr): TaskModel => {
-          if (task === arr[arr.length - 1]) task.interruptDate = Date.now();
-          return task;
+        tasks: prevState.tasks.map(task => {
+          return task.id === prevState.activeTask?.id
+            ? { ...task, interruptDate: Date.now() }
+            : task;
         }),
         activeTask: null,
         secondsRemaining: 0,
