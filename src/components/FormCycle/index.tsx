@@ -6,16 +6,16 @@ import { InputChronos } from '../InputChronos';
 import { CycleControlButton } from '../CycleControlButton';
 
 import type { TaskModel } from '../../models/TaskModel';
+import { TaskActionType } from '../../contexts/TaskContext/taskActions';
 
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
-import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
 
 import styles from './styles.module.css';
 
 export function FormCycle() {
-  const { state, setState } = useTaskContext();
+  const { state, dispatch } = useTaskContext();
 
   const nextCycle = getNextCycle(state.currentCycle);
   const nextCycleType = getNextCycleType(nextCycle);
@@ -25,7 +25,6 @@ export function FormCycle() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
     if (taskNameInput.current === null) return;
-
     const taskName: string = taskNameInput.current.value.trim();
 
     if (!taskName) {
@@ -43,34 +42,15 @@ export function FormCycle() {
       type: nextCycleType,
     };
 
-    setState(prevState => {
-      const secondsRemaining = newTask.duration * 60;
-
-      return {
-        ...prevState,
-        tasks: [...prevState.tasks, newTask],
-        activeTask: newTask,
-        currentCycle: nextCycle,
-        secondsRemaining,
-        formattedSecondsRemaining: formatSecondsToMinutes(secondsRemaining),
-      };
-    });
+    dispatch({ type: TaskActionType.START_TASK, payload: newTask });
   }
 
   function handleInterruptTask() {
-    setState(prevState => {
-      return {
-        ...prevState,
-        tasks: prevState.tasks.map(task => {
-          return task.id === prevState.activeTask?.id
-            ? { ...task, interruptDate: Date.now() }
-            : task;
-        }),
-        activeTask: null,
-        secondsRemaining: 0,
-        formattedSecondsRemaining: '00:00',
-      };
-    });
+    if (state.activeTask)
+      dispatch({
+        type: TaskActionType.INTERRUPT_TASK,
+        payload: state.activeTask,
+      });
   }
 
   return (
