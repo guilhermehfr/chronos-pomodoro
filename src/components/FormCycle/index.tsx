@@ -49,7 +49,6 @@ export function FormCycle() {
     if (state.activeTask)
       dispatch({
         type: TaskActionType.INTERRUPT_TASK,
-        payload: state.activeTask,
       });
   }
 
