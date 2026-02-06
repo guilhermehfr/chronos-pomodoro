@@ -1,6 +1,6 @@
-let instance: TimeWorkerManager | null = null;
+let instance: TimerWorkerManager | null = null;
 
-export class TimeWorkerManager {
+export class TimerWorkerManager {
   private worker: Worker;
 
   private constructor() {
@@ -9,7 +9,7 @@ export class TimeWorkerManager {
 
   static getInstance() {
     if (!instance) {
-      instance = new TimeWorkerManager();
+      instance = new TimerWorkerManager();
     }
 
     return instance;
