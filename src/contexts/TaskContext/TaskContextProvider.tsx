@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from 'react';
+import { useReducer, useEffect, useRef } from 'react';
 
 import { TaskActionType } from '../../contexts/TaskContext/taskActions';
 
@@ -8,6 +8,7 @@ import { taskReducer } from './taskReducer';
 
 import { BrowserWorkerFactory } from '../../services/BrowserWorkerFactory';
 import { TimerWorkerManager } from '../../services/TimerWorkerManager';
+import { loadBeep } from '../../utils/loadBeep';
 
 const factory = new BrowserWorkerFactory();
 const workerManager = new TimerWorkerManager(factory);
@@ -17,6 +18,7 @@ export function TaskContextProvider({
   children,
 }: Record<string, React.ReactNode>) {
   const [state, dispatch] = useReducer(taskReducer, initialTaskState);
+  const playBeepRef = useRef<ReturnType<typeof loadBeep> | null>(null);
 
   useEffect(() => {
     if (!workerManager.worker) workerManager.createWorker(url);
@@ -29,6 +31,11 @@ export function TaskContextProvider({
       const countdownSeconds: number = e.data;
 
       if (countdownSeconds <= 0) {
+        if (playBeepRef.current) {
+          playBeepRef.current();
+          playBeepRef.current = null;
+        }
+
         dispatch({ type: TaskActionType.COMPLETE_TASK });
         workerManager.terminate();
       } else {
@@ -39,6 +46,14 @@ export function TaskContextProvider({
       }
     });
   }, [state]);
+
+  useEffect(() => {
+    if (state.activeTask && playBeepRef.current === null) {
+      playBeepRef.current = loadBeep();
+    } else {
+      playBeepRef.current = null;
+    }
+  }, [state.activeTask]);
 
   return (
     <TaskContext.Provider value={{ state, dispatch }}>
