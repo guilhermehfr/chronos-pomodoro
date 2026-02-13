@@ -1,6 +1,8 @@
 import { useRef } from 'react';
 import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
 
+import { showMessage } from '../../adapters/showMessage';
+
 import { Cycles } from '../Cycles';
 import { InputChronos } from '../InputChronos';
 import { CycleControlButton } from '../CycleControlButton';
@@ -23,12 +25,14 @@ export function FormCycle() {
   const taskNameInput = useRef<HTMLInputElement>(null);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+    showMessage.dissmiss();
+
     e.preventDefault();
     if (taskNameInput.current === null) return;
     const taskName: string = taskNameInput.current.value.trim();
 
     if (!taskName) {
-      alert('Digite o nome da tarefa para iniciar');
+      showMessage.warning('Please enter a task name before starting a cycle.');
       return;
     }
 
@@ -43,9 +47,13 @@ export function FormCycle() {
     };
 
     dispatch({ type: TaskActionType.START_TASK, payload: newTask });
+    showMessage.success('Task created successfully!');
   }
 
   function handleInterruptTask() {
+    showMessage.dissmiss();
+
+    showMessage.warn('Task interrupted.');
     if (state.activeTask)
       dispatch({
         type: TaskActionType.INTERRUPT_TASK,
