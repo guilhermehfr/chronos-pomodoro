@@ -1,4 +1,5 @@
 import styles from './styles.module.css';
+import { RouterLink } from '../RouterLink';
 
 export function Footer() {
   const date = new Date();
@@ -6,12 +7,12 @@ export function Footer() {
   return (
     <>
       <footer className={styles.footer}>
-        <a
+        <RouterLink
           href='/about-pomodoro/'
           title='Learn more about the Pomodoro Technique'
         >
           Understand the Pomodoro Technique &#127813;
-        </a>
+        </RouterLink>
         <a
           href='https://github.com/guilhermehfr/react-course'
           target='_blank'

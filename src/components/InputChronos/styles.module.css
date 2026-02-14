@@ -75,5 +75,7 @@
 }
 
 input[disabled] {
+  font-style: italic;
   border-color: var(--gray-600);
+  color: var(--gray-400);
 }

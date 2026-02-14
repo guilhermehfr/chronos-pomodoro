@@ -1,4 +1,4 @@
-import styles from './styles.module.css';
+import { useState, useEffect } from 'react';
 import {
   HouseIcon,
   HistoryIcon,
@@ -6,83 +6,84 @@ import {
   SunIcon,
   MoonIcon,
 } from 'lucide-react';
-import { useState, useEffect } from 'react';
+
+import { RouterLink } from '../RouterLink';
+
+import styles from './styles.module.css';
 
 type AvaiableThemes = 'dark' | 'light';
 
 export function Menu() {
   const [theme, setTheme] = useState<AvaiableThemes>(() => {
-    const themeStoraged = localStorage.getItem('data-theme');
-    if (themeStoraged === 'dark' || themeStoraged === 'light') {
-      return themeStoraged as AvaiableThemes;
-    }
-    return 'dark';
+    const stored = localStorage.getItem('data-theme');
+    return stored === 'dark' || stored === 'light' ? stored : 'dark';
   });
-  const nextTheme = theme === 'dark' ? 'light' : 'dark';
-
-  function handleThemeChange(
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-  ) {
-    e.preventDefault();
-
-    setTheme(prevTheme => {
-      const newTheme = prevTheme === 'dark' ? 'light' : 'dark';
-      return newTheme;
-    });
-  }
+  const nextTheme: AvaiableThemes = theme === 'dark' ? 'light' : 'dark';
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('data-theme', theme);
   }, [theme]);
 
+  const menuItems = [
+    {
+      key: 'home',
+      href: '/',
+      icon: <HouseIcon />,
+      label: 'Initial page',
+      title: 'Initial page',
+      className: styles['menu-item'],
+    },
+    {
+      key: 'history',
+      href: '#',
+      icon: <HistoryIcon />,
+      label: 'History',
+      title: 'Tasks history',
+    },
+    {
+      key: 'settings',
+      href: '#',
+      icon: <SettingsIcon />,
+      label: 'Configurations',
+      title: 'Configurations',
+    },
+  ];
+
+  function handleThemeChange(
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) {
+    e.preventDefault();
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+  }
+
   return (
-    <>
-      <nav className={styles['menu']}>
-        <ul>
-          <li className={styles['menu-item']}>
-            <a
+    <nav className={styles.menu}>
+      <ul>
+        {menuItems.map(item => (
+          <li key={item.key} className={item.className || undefined}>
+            <RouterLink
               className={styles['menu-link']}
-              href='/'
-              aria-label='Initial page'
-              title='Initial page'
+              href={item.href}
+              aria-label={item.label}
+              title={item.title}
             >
-              <HouseIcon />
-            </a>
+              {item.icon}
+            </RouterLink>
           </li>
-          <li>
-            <a
-              className={styles['menu-link']}
-              href='#'
-              aria-label='History'
-              title='Tasks history'
-            >
-              <HistoryIcon />
-            </a>
-          </li>
-          <li>
-            <a
-              className={styles['menu-link']}
-              href='#'
-              aria-label='Configurations'
-              title='Configurations'
-            >
-              <SettingsIcon />
-            </a>
-          </li>
-          <li>
-            <a
-              className={styles['menu-link']}
-              href='#'
-              aria-label={`Change theme to ${nextTheme}`}
-              title={`Change theme to ${nextTheme}`}
-              onClick={handleThemeChange}
-            >
-              {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </>
+        ))}
+        <li>
+          <RouterLink
+            className={styles['menu-link']}
+            href='#'
+            aria-label={`Change theme to ${nextTheme}`}
+            title={`Change theme to ${nextTheme}`}
+            onClick={handleThemeChange}
+          >
+            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+          </RouterLink>
+        </li>
+      </ul>
+    </nav>
   );
 }

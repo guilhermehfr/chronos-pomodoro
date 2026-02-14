@@ -23,6 +23,8 @@ export function FormCycle() {
   const nextCycleType = getNextCycleType(nextCycle);
 
   const taskNameInput = useRef<HTMLInputElement>(null);
+  const lastTaskName =
+    state.tasks.length > 0 ? state.tasks[state.tasks.length - 1].name : '';
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     showMessage.dissmiss();
@@ -77,6 +79,7 @@ export function FormCycle() {
             labelText='Task:'
             ref={taskNameInput}
             disabled={!!state.activeTask}
+            defaultValue={lastTaskName}
           />
         </div>
 
