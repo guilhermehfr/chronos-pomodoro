@@ -9,6 +9,7 @@ import { taskReducer } from './taskReducer';
 import { BrowserWorkerFactory } from '../../services/BrowserWorkerFactory';
 import { TimerWorkerManager } from '../../services/TimerWorkerManager';
 import { loadBeep } from '../../utils/loadBeep';
+import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
 
 const factory = new BrowserWorkerFactory();
 const workerManager = new TimerWorkerManager(factory);
@@ -29,12 +30,15 @@ export function TaskContextProvider({
 
     workerManager.onmessage((e: MessageEvent) => {
       const countdownSeconds: number = e.data;
+      document.title = `${formatSecondsToMinutes(countdownSeconds)} - Chronos Pomodoro`;
 
       if (countdownSeconds <= 0) {
         if (playBeepRef.current) {
           playBeepRef.current();
           playBeepRef.current = null;
         }
+
+        document.title = 'Chronos Pomodoro';
 
         dispatch({ type: TaskActionType.COMPLETE_TASK });
         workerManager.terminate();
@@ -51,6 +55,7 @@ export function TaskContextProvider({
     if (state.activeTask && playBeepRef.current === null) {
       playBeepRef.current = loadBeep();
     } else {
+      document.title = 'Chronos Pomodoro';
       playBeepRef.current = null;
     }
   }, [state.activeTask]);
