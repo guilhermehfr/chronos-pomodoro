@@ -43,7 +43,7 @@ export function Menu() {
           <li className={styles['menu-item']}>
             <a
               className={styles['menu-link']}
-              href='#'
+              href='/'
               aria-label='Initial page'
               title='Initial page'
             >
