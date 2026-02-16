@@ -36,14 +36,14 @@ export function Menu() {
     },
     {
       key: 'history',
-      href: '#',
+      href: '/history/',
       icon: <HistoryIcon />,
       label: 'History',
       title: 'Tasks history',
     },
     {
       key: 'settings',
-      href: '#',
+      href: '/settings/',
       icon: <SettingsIcon />,
       label: 'Configurations',
       title: 'Configurations',

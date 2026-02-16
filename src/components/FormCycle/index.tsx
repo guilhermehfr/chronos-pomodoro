@@ -5,7 +5,7 @@ import { showMessage } from '../../adapters/showMessage';
 
 import { Cycles } from '../Cycles';
 import { InputChronos } from '../InputChronos';
-import { CycleControlButton } from '../CycleControlButton';
+import { DefaultButton } from '../DefaultButton';
 
 import type { TaskModel } from '../../models/TaskModel';
 import { TaskActionType } from '../../contexts/TaskContext/taskActions';
@@ -89,7 +89,7 @@ export function FormCycle() {
 
         <div className={styles['form-row']}>
           {state.activeTask ? (
-            <CycleControlButton
+            <DefaultButton
               key='stop_task'
               type='button'
               onClick={handleInterruptTask}
@@ -99,7 +99,7 @@ export function FormCycle() {
               icon={<StopCircleIcon />}
             />
           ) : (
-            <CycleControlButton
+            <DefaultButton
               key='start_task'
               type='submit'
               aria-label='start new task'
