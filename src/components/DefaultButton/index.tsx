@@ -1,11 +1,11 @@
 import styles from './styles.module.css';
 
-type CycleControlButtonProps = {
+type DefaultButtonProps = {
   icon: React.ReactNode;
   color: 'green' | 'red';
 } & React.ComponentProps<'button'>;
 
-export function CycleControlButton(props: CycleControlButtonProps) {
+export function DefaultButton(props: DefaultButtonProps) {
   return (
     <button className={`${styles.button} ${styles[props.color]}`} {...props}>
       {props.icon}
