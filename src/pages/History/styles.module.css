@@ -1,0 +1,18 @@
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  gap: 1.5rem;
+}
+
+.history-header button {
+  min-width: auto;
+  height: 4rem;
+  width: 4rem;
+}
+
+.history-header button svg {
+  width: 2.5rem;
+  height: 2.5rem;
+}
