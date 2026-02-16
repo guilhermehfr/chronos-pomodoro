@@ -1,5 +1,7 @@
 import { useReducer, useEffect, useRef } from 'react';
 
+import type { TaskStateModel } from '../../models/TaskStateModel';
+
 import { TaskActionType } from '../../contexts/TaskContext/taskActions';
 
 import { initialTaskState } from './initialTaskState';
@@ -8,20 +10,33 @@ import { taskReducer } from './taskReducer';
 
 import { BrowserWorkerFactory } from '../../services/BrowserWorkerFactory';
 import { TimerWorkerManager } from '../../services/TimerWorkerManager';
+
 import { loadBeep } from '../../utils/loadBeep';
 import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
 
 const factory = new BrowserWorkerFactory();
 const workerManager = new TimerWorkerManager(factory);
-const url = new URL('../../workers/timerWorker.js', import.meta.url);
 
 export function TaskContextProvider({
   children,
 }: Record<string, React.ReactNode>) {
-  const [state, dispatch] = useReducer(taskReducer, initialTaskState);
+  const [state, dispatch] = useReducer(
+    taskReducer,
+    initialTaskState,
+    (initialState: TaskStateModel): TaskStateModel => {
+      const storedState = localStorage.getItem('state');
+      if (storedState) {
+        return JSON.parse(storedState) as TaskStateModel;
+      }
+      return initialState;
+    },
+  );
   const playBeepRef = useRef<ReturnType<typeof loadBeep> | null>(null);
 
   useEffect(() => {
+    localStorage.setItem('state', JSON.stringify(state));
+
+    const url = new URL('../../workers/timerWorker.js', import.meta.url);
     if (!workerManager.worker) workerManager.createWorker(url);
 
     if (!state.activeTask) workerManager.terminate();
@@ -59,6 +74,33 @@ export function TaskContextProvider({
       playBeepRef.current = null;
     }
   }, [state.activeTask]);
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      if (state.activeTask) {
+        dispatch({ type: TaskActionType.INTERRUPT_TASK });
+
+        const interruptedState: TaskStateModel = {
+          ...state,
+          tasks: state.tasks.map(task =>
+            task.id === state.activeTask?.id
+              ? { ...task, interruptDate: Date.now() }
+              : task,
+          ),
+          activeTask: null,
+          secondsRemaining: 0,
+          formattedSecondsRemaining: '00:00',
+        };
+        localStorage.setItem('state', JSON.stringify(interruptedState));
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [state]);
 
   return (
     <TaskContext.Provider value={{ state, dispatch }}>
