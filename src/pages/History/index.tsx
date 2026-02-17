@@ -4,9 +4,25 @@ import { MainTemplate } from '../../templates/MainTemplate';
 import { Container } from '../../components/Container';
 import { DefaultButton } from '../../components/DefaultButton';
 
+import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
+
 import styles from './styles.module.css';
 
 export function History() {
+  const { state } = useTaskContext();
+
+  const status = {
+    inProgress: 'in Progress',
+    completed: 'Completed',
+    interrupted: 'Interrupted',
+  };
+
+  const cycleDescription = {
+    workTime: 'Work',
+    shortBreakTime: 'Break',
+    longBreakTime: 'Long Break',
+  };
+
   return (
     <>
       <MainTemplate>
@@ -16,11 +32,12 @@ export function History() {
             icon={<Trash />}
             color='red'
             aria-label='Delete all history tasks'
+            title='Delete all history tasks'
           />
         </div>
 
         <Container>
-          <div className='responsiveTable'>
+          <div className={styles.responsiveTable}>
             <table>
               <thead>
                 <tr>
@@ -33,13 +50,23 @@ export function History() {
               </thead>
 
               <tbody>
-                <tr>
-                  <td>Study</td>
-                  <td>25min</td>
-                  <td>2024-01-15</td>
-                  <td>Completed</td>
-                  <td>Work</td>
-                </tr>
+                {[...state.tasks].reverse().map(task => {
+                  return (
+                    <tr key={task.id}>
+                      <td>{task.name}</td>
+                      <td>{task.duration}</td>
+                      <td>{new Date(task.startDate).toLocaleString()}</td>
+                      <td>
+                        {task.completeDate
+                          ? status['completed']
+                          : task.interruptDate
+                            ? status['interrupted']
+                            : status['inProgress']}
+                      </td>
+                      <td>{cycleDescription[task.type]}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
