@@ -6,6 +6,10 @@
   gap: 1.5rem;
 }
 
+.history-header ~ h2 {
+  text-align: center;
+}
+
 .history-header button {
   min-width: auto;
   height: 4rem;
@@ -30,7 +34,14 @@
 }
 
 .responsiveTable th {
-  background-color: var(--gray-600);
+  background-color: var(--gray-500);
+}
+
+.responsiveTable th:nth-child(1):hover,
+.responsiveTable th:nth-child(2):hover,
+.responsiveTable th:nth-child(3):hover {
+  transition: 150ms;
+  background-color: var(--gray-700);
 }
 
 .responsiveTable td {
@@ -42,4 +53,12 @@
   border-bottom: 0.2rem solid var(--gray-700);
   text-align: left;
   padding: 1.6rem;
+}
+
+.activeTask td {
+  background-color: var(--gray-600);
+}
+
+.sortableTh {
+  cursor: pointer;
 }
