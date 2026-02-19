@@ -17,7 +17,7 @@ import {
 import styles from './styles.module.css';
 
 export function History() {
-  const { state } = useTaskContext();
+  const { state, dispatch } = useTaskContext();
   const [sortType, setSortType] = useState<SortType>('date');
   const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
 
@@ -55,6 +55,7 @@ export function History() {
               color='red'
               aria-label='Delete all history tasks'
               title='Delete all history tasks'
+              onClick={() => dispatch({ type: 'RESET_STATE' })}
             />
           )}
         </div>
@@ -66,24 +67,13 @@ export function History() {
               <table>
                 <thead>
                   <tr>
-                    <th
-                      onClick={() => handleSort('alphabetical')}
-                      className={styles.sortableTh}
-                    >
+                    <th onClick={() => handleSort('alphabetical')}>
                       Task &#8597;
                     </th>
-                    <th
-                      onClick={() => handleSort('duration')}
-                      className={styles.sortableTh}
-                    >
+                    <th onClick={() => handleSort('duration')}>
                       Duration &#8597;
                     </th>
-                    <th
-                      onClick={() => handleSort('date')}
-                      className={styles.sortableTh}
-                    >
-                      Date &#8597;
-                    </th>
+                    <th onClick={() => handleSort('date')}>Date &#8597;</th>
                     <th>Status</th>
                     <th>Type</th>
                   </tr>
