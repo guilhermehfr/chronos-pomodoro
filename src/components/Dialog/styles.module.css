@@ -1,0 +1,16 @@
+.dialog-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.dialog-buttons button {
+  min-width: auto;
+  height: 4rem;
+  width: 4rem;
+}
+
+.dialog-buttons button svg {
+  width: 2.5rem;
+  height: 2.5rem;
+}
