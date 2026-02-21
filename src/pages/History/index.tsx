@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Trash } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 import type { TaskModel } from '../../models/TaskModel';
 
@@ -8,6 +9,9 @@ import { Container } from '../../components/Container';
 import { DefaultButton } from '../../components/DefaultButton';
 
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
+import { TaskActionType } from '../../contexts/TaskContext/taskActions';
+import { showMessage } from '../../adapters/showMessage';
+
 import {
   sortTasks,
   type SortType,
@@ -44,6 +48,21 @@ export function History() {
     }
   };
 
+  function handleHistoryClear(): void {
+    showMessage.dissmiss();
+    showMessage.confirm(
+      'Are you sure you want to clear all history tasks?',
+      (confirmed: boolean) => {
+        if (confirmed) {
+          showMessage.success('History cleared successfully.');
+          dispatch({ type: TaskActionType.RESET_STATE });
+        } else {
+          showMessage.info('History clear canceled.');
+        }
+      },
+    );
+  }
+
   return (
     <>
       <MainTemplate>
@@ -55,7 +74,7 @@ export function History() {
               color='red'
               aria-label='Delete all history tasks'
               title='Delete all history tasks'
-              onClick={() => dispatch({ type: 'RESET_STATE' })}
+              onClick={handleHistoryClear}
             />
           )}
         </div>
