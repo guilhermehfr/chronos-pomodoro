@@ -70,12 +70,12 @@ export function FormCycle() {
         action='#'
         autoComplete='off'
       >
-        <div className={styles['form-row']}>
+        <div>
           <InputChronos
             id='task'
             type='text'
             name='current-task'
-            placeholder='Ex.: study to the exam'
+            placeholder='Studying to exam...'
             labelText='Task:'
             ref={taskNameInput}
             disabled={!!state.activeTask}
@@ -83,11 +83,11 @@ export function FormCycle() {
           />
         </div>
 
-        <div className={styles['form-row']}>
+        <div>
           <Cycles />
         </div>
 
-        <div className={styles['form-row']}>
+        <div>
           {state.activeTask ? (
             <DefaultButton
               key='stop_task'

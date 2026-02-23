@@ -13,16 +13,19 @@ export function InputChronos({
   ...rest
 }: InputProps) {
   return (
-    <>
-      <label htmlFor={styles.inputChronos} className={styles['input-label']}>
-        <input
-          id={id}
-          className={styles.input}
-          placeholder={placeholder}
-          {...rest}
-        />
-        <span className={styles['label-text']}>{labelText}</span>
-      </label>
-    </>
+    <label htmlFor={id} className={styles['input-label']}>
+      <input
+        id={id}
+        className={styles.input}
+        placeholder={placeholder}
+        style={
+          {
+            '--placeholder-padding': `${labelText.length * 0.9}rem`,
+          } as React.CSSProperties
+        }
+        {...rest}
+      />
+      <span className={styles['label-text']}>{labelText}</span>
+    </label>
   );
 }
