@@ -49,7 +49,7 @@ export function History() {
   };
 
   function handleHistoryClear(): void {
-    showMessage.dissmiss();
+    showMessage.dismiss();
     showMessage.confirm(
       'Are you sure you want to clear all history tasks?',
       (confirmed: boolean) => {

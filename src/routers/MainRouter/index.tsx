@@ -23,8 +23,9 @@ export function MainRouter() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about-pomodoro/' element={<PomodoroTechnique />} />
-        <Route path='*' element={<NotFound />} />
         <Route path='/history/' element={<History />} />
+        <Route path='/settings/' element={<Settings />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

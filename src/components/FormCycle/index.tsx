@@ -27,7 +27,7 @@ export function FormCycle() {
     state.tasks.length > 0 ? state.tasks[state.tasks.length - 1].name : '';
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
-    showMessage.dissmiss();
+    showMessage.dismiss();
 
     e.preventDefault();
     if (taskNameInput.current === null) return;
@@ -53,7 +53,7 @@ export function FormCycle() {
   }
 
   function handleInterruptTask() {
-    showMessage.dissmiss();
+    showMessage.dismiss();
 
     showMessage.warn('Task interrupted.');
     if (state.activeTask)
