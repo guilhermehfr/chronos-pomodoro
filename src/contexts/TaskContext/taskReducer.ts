@@ -69,5 +69,21 @@ export function taskReducer(
         formattedSecondsRemaining: '00:00',
       };
     }
+
+    case TaskActionType.UPDATE_TASK_DURATIONS: {
+      const { focusTime, restTime, longRestTime } = action.payload;
+
+      return {
+        ...state,
+        config: {
+          focusTime,
+          restTime,
+          longRestTime,
+        },
+      };
+    }
+
+    default:
+      return state;
   }
 }

@@ -6,6 +6,7 @@ export const TaskActionType = {
   RESET_STATE: 'RESET_STATE',
   UPDATE_COUNTDOWN: 'UPDATE_COUNTDOWN',
   COMPLETE_TASK: 'COMPLETE_TASK',
+  UPDATE_TASK_DURATIONS: 'UPDATE_TASK_DURATIONS',
 } as const;
 
 export type TaskActionTypes =
@@ -17,9 +18,17 @@ export type TaskActionModel =
       payload: TaskModel;
     }
   | { type: typeof TaskActionType.INTERRUPT_TASK }
+  | { type: typeof TaskActionType.COMPLETE_TASK }
   | { type: typeof TaskActionType.RESET_STATE }
   | {
       type: typeof TaskActionType.UPDATE_COUNTDOWN;
       payload: { secondsRemaining: number };
     }
-  | { type: typeof TaskActionType.COMPLETE_TASK };
+  | {
+      type: typeof TaskActionType.UPDATE_TASK_DURATIONS;
+      payload: {
+        focusTime: number;
+        restTime: number;
+        longRestTime: number;
+      };
+    };

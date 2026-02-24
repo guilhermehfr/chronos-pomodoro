@@ -1,0 +1,20 @@
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  margin: 1rem 0rem 4.5rem 0rem;
+}
