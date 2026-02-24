@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Trash } from 'lucide-react';
-import { toast } from 'react-toastify';
 
 import type { TaskModel } from '../../models/TaskModel';
 
