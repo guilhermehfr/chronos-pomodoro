@@ -34,9 +34,9 @@ export function History() {
   };
 
   const cycleDescription = {
-    workTime: 'Work',
-    shortBreakTime: 'Break',
-    longBreakTime: 'Long Break',
+    focusTime: 'Focus',
+    restTime: 'Rest',
+    longRestTime: 'Long Rest',
   };
 
   const handleSort = (type: SortType) => {

@@ -42,9 +42,9 @@ function isValidTaskState(state: unknown): state is TaskStateModel {
     typeof s.currentCycle === 'number' &&
     s.config !== null &&
     typeof s.config === 'object' &&
-    typeof (s.config as Record<string, unknown>).workTime === 'number' &&
-    typeof (s.config as Record<string, unknown>).shortBreakTime === 'number' &&
-    typeof (s.config as Record<string, unknown>).longBreakTime === 'number'
+    typeof (s.config as Record<string, unknown>).focusTime === 'number' &&
+    typeof (s.config as Record<string, unknown>).restTime === 'number' &&
+    typeof (s.config as Record<string, unknown>).longRestTime === 'number'
   );
 }
 

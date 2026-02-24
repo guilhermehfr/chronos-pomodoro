@@ -9,20 +9,19 @@ import {
 
 import { RouterLink } from '../RouterLink';
 
+import { getTheme, setTheme as saveTheme } from '../../utils/safeStorage';
+
 import styles from './styles.module.css';
 
 type AvaiableThemes = 'dark' | 'light';
 
 export function Menu() {
-  const [theme, setTheme] = useState<AvaiableThemes>(() => {
-    const stored = localStorage.getItem('data-theme');
-    return stored === 'dark' || stored === 'light' ? stored : 'dark';
-  });
+  const [theme, setTheme] = useState<AvaiableThemes>(() => getTheme('dark'));
   const nextTheme: AvaiableThemes = theme === 'dark' ? 'light' : 'dark';
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('data-theme', theme);
+    saveTheme(theme);
   }, [theme]);
 
   const menuItems = [

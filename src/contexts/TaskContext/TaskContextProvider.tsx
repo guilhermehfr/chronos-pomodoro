@@ -13,6 +13,7 @@ import { TimerWorkerManager } from '../../services/TimerWorkerManager';
 
 import { loadBeep } from '../../utils/loadBeep';
 import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
+import { getTaskState, setTaskState } from '../../utils/safeStorage';
 
 const factory = new BrowserWorkerFactory();
 const workerManager = new TimerWorkerManager(factory);
@@ -24,17 +25,13 @@ export function TaskContextProvider({
     taskReducer,
     initialTaskState,
     (initialState: TaskStateModel): TaskStateModel => {
-      const storedState = localStorage.getItem('state');
-      if (storedState) {
-        return JSON.parse(storedState) as TaskStateModel;
-      }
-      return initialState;
+      return getTaskState(initialState);
     },
   );
   const playBeepRef = useRef<ReturnType<typeof loadBeep> | null>(null);
 
   useEffect(() => {
-    localStorage.setItem('state', JSON.stringify(state));
+    setTaskState(state);
 
     const url = new URL('../../workers/timerWorker.js', import.meta.url);
     if (!workerManager.worker) workerManager.createWorker(url);
@@ -53,8 +50,6 @@ export function TaskContextProvider({
           playBeepRef.current = null;
         }
 
-        document.title = 'Chronos Pomodoro';
-
         dispatch({ type: TaskActionType.COMPLETE_TASK });
         workerManager.terminate();
       } else {
@@ -70,7 +65,6 @@ export function TaskContextProvider({
     if (state.activeTask && playBeepRef.current === null) {
       playBeepRef.current = loadBeep();
     } else {
-      document.title = 'Chronos Pomodoro';
       playBeepRef.current = null;
     }
   }, [state.activeTask]);
@@ -91,7 +85,7 @@ export function TaskContextProvider({
           secondsRemaining: 0,
           formattedSecondsRemaining: '00:00',
         };
-        localStorage.setItem('state', JSON.stringify(interruptedState));
+        setTaskState(interruptedState);
       }
     };
 

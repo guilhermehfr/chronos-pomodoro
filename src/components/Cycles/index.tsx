@@ -9,9 +9,9 @@ export function Cycles() {
   const cycleStep = Array.from({ length: state.currentCycle });
 
   const cycleDescription = {
-    workTime: 'focus',
-    shortBreakTime: 'rest',
-    longBreakTime: 'rest longer',
+    focusTime: 'focus',
+    restTime: 'rest',
+    longRestTime: 'rest longer',
   };
 
   const nextCycle = getNextCycle(cycleStep.length);

@@ -27,14 +27,14 @@
   height: 2rem;
 }
 
-.workTime {
+.focusTime {
   background-color: var(--success);
 }
 
-.shortBreakTime {
+.restTime {
   background-color: var(--info);
 }
 
-.longBreakTime {
+.longRestTime {
   background-color: var(--warning);
 }
