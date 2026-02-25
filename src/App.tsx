@@ -1,4 +1,5 @@
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { MainRouter } from './routers/MainRouter';
 
 import { TaskContextProvider } from './contexts/TaskContext/TaskContextProvider';
@@ -15,6 +16,7 @@ export function App() {
         <MainRouter />
       </MessageContainer>
       <Analytics />
+      <SpeedInsights />
     </TaskContextProvider>
   );
 }
