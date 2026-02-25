@@ -9,14 +9,16 @@ import { History } from '../../pages/History';
 import { Settings } from '../../pages/Settings';
 import { NotFound } from '../../pages/NotFound';
 
-function ScrollToTop() {
+function AdjustPageViewAndTitle() {
   const { state } = useTaskContext();
   const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    if (state.activeTask || pathname === '/') {
+    if (state.activeTask) return;
+
+    if (pathname === '/') {
       document.title = 'Chronos Pomodoro';
       return;
     }
@@ -36,7 +38,7 @@ function ScrollToTop() {
 export function MainRouter() {
   return (
     <BrowserRouter>
-      <ScrollToTop />
+      <AdjustPageViewAndTitle />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about-pomodoro/' element={<PomodoroTechnique />} />
