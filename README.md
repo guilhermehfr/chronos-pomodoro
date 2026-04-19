@@ -11,7 +11,7 @@ A Minimalist Pomodoro timer built with **React**, **TypeScript**, and **Vite**.
 Designed to help users stay focused with automated work/break cycles, persistent
 task history, and a clean themeable UI.
 
-<img width="700" height="1078" alt="image" src="https://github.com/user-attachments/assets/91787b71-d92c-4e62-96ce-3c60f96f2b50" />
+<img width="700" height="400" alt="image" src="https://github.com/user-attachments/assets/91787b71-d92c-4e62-96ce-3c60f96f2b50" />
 
 **[Live Demo →](https://chronos-pomodoro-timer.vercel.app)**
 
