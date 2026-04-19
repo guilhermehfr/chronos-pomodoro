@@ -12,7 +12,7 @@ Um timer Pomodoro minimalista construído com **React**, **TypeScript** e
 automáticos de trabalho/descanso, histórico de tarefas persistente e uma
 interface limpa com suporte a temas.
 
-<img width="700" height="1078" alt="image" src="https://github.com/user-attachments/assets/91787b71-d92c-4e62-96ce-3c60f96f2b50" />
+<img width="700" height="400" alt="image" src="https://github.com/user-attachments/assets/91787b71-d92c-4e62-96ce-3c60f96f2b50" />
 
 **[Demo ao Vivo →](https://chronos-pomodoro-timer.vercel.app)**
 
